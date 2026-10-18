@@ -1,0 +1,8 @@
+# Data and model runs produced by the workflow
+data/
+runs/
+gtsm_template/
+*.nc
+
+__pycache__/
+slurm-*.out

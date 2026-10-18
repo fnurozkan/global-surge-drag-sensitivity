@@ -1,0 +1,10 @@
+name: surge-drag
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.9
+  - xarray>=2023.5
+  - numpy
+  - netcdf4
+  - cdsapi
+  - cdo
