@@ -1,6 +1,11 @@
 # Sea-surface drag experiments for global storm-surge modelling
 
-Workflow that turns ERA5 reanalysis into atmospheric forcing for four sea-surface drag experiments with the Global Tide and Surge Model (GTSM, Delft3D Flexible Mesh), and sets up the yearly model runs (2006–2015) on the Snellius supercomputer.
+Workflow that turns ERA5 reanalysis into atmospheric forcing for four sea-surface drag experiments with the Global Tide and Surge Model (GTSM, Delft3D Flexible Mesh), sets up the yearly model runs (2006–2015) on the Snellius supercomputer, and makes the figures of the paper.
+
+<p align="center">
+  <img src="figures/published/fig07.png" width="720" alt="Hurricane Fiona: ERA5 fields, wind stress and surge for the drag experiments">
+  <br><em>Hurricane Fiona (2022): ERA5 fields, wind stress and surge in the drag experiments (Fig. 7 of the paper).</em>
+</p>
 
 It accompanies:
 
@@ -54,6 +59,28 @@ The wind components are scaled by $U_\rho / U_{10N}$, keeping the wind direction
 
 Each step is a SLURM job, run from the repository root, e.g. `sbatch era5_forcing/02_prepare_run_windows.sh`. Steps 1 and 3 have `.slurm` wrappers around the Python scripts. Paths, years and experiment names are set in [`config.sh`](config.sh).
 
+## Figures
+
+The [`figures/`](figures) folder has one notebook per figure of the paper, showing how each was made. The processed input files are not included; set `DATA_DIR` at the top of a notebook to your own copy. Model output for the two storms and the annual maxima are on [4TU.ResearchData](https://doi.org/10.4121/923c1f55-01f7-4140-b9ce-ab3be5a617c7). The notebooks use the environment in [`figures/environment.yml`](figures/environment.yml).
+
+| Figure | Notebook | Shows |
+|---|---|---|
+| 2 | [`fig02_station_map`](figures/fig02_station_map.ipynb) | GTSM output points and GESLA-3 tide gauges |
+| 3 | [`fig03_era5_global_fields`](figures/fig03_era5_global_fields.ipynb) | Global ERA5 wind, Charnock parameter, stability and air density |
+| 4 | [`fig04_drag_and_stability`](figures/fig04_drag_and_stability.ipynb) | Drag coefficient and atmospheric stability against wind speed |
+| 5, 7 | [`fig05_fig07_storm_maps`](figures/fig05_fig07_storm_maps.ipynb) | Storm Xaver (2013) and hurricane Fiona (2022) maps |
+| 6 | [`fig06_xaver_validation`](figures/fig06_xaver_validation.ipynb) | Xaver: modelled versus observed surge |
+| 8 | [`fig08_fiona_validation`](figures/fig08_fiona_validation.ipynb) | Fiona: modelled versus observed surge |
+| 9 | [`fig09_regional_surge_effects`](figures/fig09_regional_surge_effects.ipynb) | Regional effect of air density, stability and Charnock parameter on surge |
+| 10 | [`fig10_annual_maxima_vs_observations`](figures/fig10_annual_maxima_vs_observations.ipynb) | Annual-maximum surges at GESLA-3 stations, model versus observations |
+
+<p align="center">
+  <img src="figures/published/fig10.png" width="900" alt="Modelled against observed annual-maximum surges for the four experiments">
+  <br><em>Modelled against observed annual-maximum surges at GESLA-3 stations, 2006–2015 (Fig. 10 of the paper).</em>
+</p>
+
+All published figures are in [`figures/published/`](figures/published). They are reproduced from Özkan et al. (2025), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
 ## Requirements
 
 - A [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/) account for step 1
@@ -66,6 +93,7 @@ The scripts load Snellius modules (`module load ...`); adapt or remove those lin
 ## Notes
 
 - These are cleaned-up versions of the scripts used for the paper: paths are gathered in `config.sh`, one-off and duplicate scripts are removed, and the steps are renumbered. On test data, the stress-equivalent wind from step 3 is bit-for-bit identical to the original script.
+- The figure notebooks contain the original plotting code for the published figures. Only the file paths are changed, and exploratory cells and earlier figure versions are left out. In the code, the experiments still have their working names (`cc`, `cv`, `ntr`, `rho`); the figure labels use the paper names.
 - The download script uses the CDS request format of 2023, when the data for the paper were downloaded. Files from the current CDS name the time coordinate `valid_time`; rename it to `time` before step 2.
 
 ## Citation

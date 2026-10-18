@@ -1,0 +1,17 @@
+# Environment for the figure notebooks (proplot 0.9.7 needs matplotlib 3.4)
+name: surge-drag-figures
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - matplotlib=3.4
+  - proplot=0.9.7
+  - cartopy=0.22
+  - regionmask=0.11
+  - xarray
+  - netcdf4
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - jupyterlab
